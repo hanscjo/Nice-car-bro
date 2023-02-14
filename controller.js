@@ -1,10 +1,10 @@
 function streetChange() {
-    streetCounter++;
-    if (streetCounter == roadImages.length) {
-        streetCounter = 0;
+    roadCounter++;
+    if (roadCounter == roadImages.length) {
+        roadCounter = 0;
     }
-    roadSrc = roadImages[counter];
-    dialogText = dialogTexts[counter];
+    roadSrc = roadImages[roadCounter];
+    dialogText = dialogTexts[roadCounter];
     view();
 }
 
@@ -40,9 +40,9 @@ function handleEncounter() {
     else if (givenEncounter.type == 'friend') {
         dialogText += `<br>
         <button onclick="playerResponse(this)">Vink!</button>
-        <br>
+        
         <button onclick="playerResponse(this)">Peace!</button>
-        <br>
+        
         <button onclick="playerResponse(this)">Dab!</button>`;
         eventImgSrc = 'img/events/king.jpg';
     }

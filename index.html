@@ -14,15 +14,17 @@
     <script>
         //model
         let eventCounter = 0;
-        let streetCounter = 0;
+        let roadCounter = 0;
         let coolness = 20;
         let intervals = [];
 
-        let roadSrc = 'img/forest.jpeg';
+        let roadSrc = 'img/bridge.jpg';
         let roadImages = ['img/forest.jpeg', 'img/bridge.jpg', 'img/castle.jpg'];
         let dialogText = 'Du kjører i skogen...'
         let dialogTexts = ['Du kjører i skogen...', 'Du kjører over brua!', 'Du kjører inn på Karl Johans gate'];
 
+        let carPositionLeft = 93;
+        let carPositionTop = "100px";
 
         let eventImgSrc = '';
         let currentEvent = '';
@@ -45,18 +47,23 @@
         function view() { /*HTML*/ //<-- dersom du vil få innerhtml stringen til å se ut som HTML
             
             let width = document.body.clientWidth;
-            document.getElementById("app").innerHTML = `
+            let html = `
             <h1>Velkommen!</h1>
             <div id="roadBox">
                 <img id="roadImg" height="660px" width="100%" src=${roadSrc}>
-                <img id="eventImg" height="100px" src=${eventImgSrc}> 
-                <img id="carImg" src="img/car.png" height="100px">
-            </div>
+                <img id="eventImg" height="100px" src=${eventImgSrc}>`;
+
+            roadCounter < 2 ? html += `<img id="carImg" src="img/car.png" height="100px" style="left: ${carPositionLeft}%; top: 300px">` 
+            : html += `<img id="carImg" src="img/car.png" height="100px" style="top: ${carPositionTop}%">`;
+
+            html += `</div>
             <div id="dialogBox" width='100%'>${dialogText}</div>
             <br>
             <p><b>Style</b></p>
             <canvas id="coolness" height="50px" width="${width}px"></canvas>
             `;
+
+            document.getElementById("app").innerHTML = html;
             let canvas = document.getElementById("coolness");
             let context = canvas.getContext("2d");
             let percentageWidth = width * (coolness/100);
@@ -70,10 +77,11 @@
         }
 
         //controller
-
+        
         
 
     </script>
     <script src="controller.js"></script>
+    <script src="car.js"></script>
 </body>    
 </html>

@@ -16,10 +16,8 @@
 }
 
 #carImg {
-    position: fixed;
+    position: relative;
     z-index: 1;
-    margin-top: 300px;
-    margin-left: 80%;
 }
 
 #dialogBox {
