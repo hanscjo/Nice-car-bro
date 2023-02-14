@@ -14,16 +14,16 @@
     <script>
         //model
         let eventCounter = 0;
-        let roadCounter = 0;
+        let roadCounter = 2;
         let coolness = 20;
         let intervals = [];
 
-        let roadSrc = 'img/forest.jpeg';
+        let roadSrc = 'img/castle.jpg';
         let roadImages = ['img/forest.jpeg', 'img/bridge.jpg', 'img/castle.jpg'];
         let dialogText = 'Du kjører i skogen...'
         let dialogTexts = ['Du kjører i skogen...', 'Du kjører over brua!', 'Du kjører inn på Karl Johans gate'];
 
-        let carPositionLeft = 600;
+        let carPositionLeft = 50;
         let carPositionTop = 87;
         let carHeight = 100;
 
@@ -52,12 +52,13 @@
             <h1>Velkommen!</h1>
             <div id="roadBox">
                 <img id="roadImg" height="660px" width="100%" src=${roadSrc}>
-                <img id="eventImg" height="100px" src=${eventImgSrc}>`;
+                <img id="eventImg" height="100px" src=${eventImgSrc}>
 
-            roadCounter < 2 ? html += `<img id="carImg" src="img/car.png" height="100px" style="top: ${carPositionTop}px; left: ${carPositionLeft}%">` 
-            : html += `<img id="carImg" src="img/car.png" height='${carHeight}px' style="top: ${carPositionTop}%; left: ${carPositionLeft}px">`;
+            ${roadCounter < 2 ? `<img id="carImg" src="img/car.png" height="100px" style="top: ${carPositionTop}%; left: ${carPositionLeft}%">` 
+            : `<img id="carImg" src="img/car.png" height='${carHeight}px' style="top: ${carPositionTop}%; left: ${carPositionLeft}%">`}
 
-            html += `</div>
+            </div>
+
             <div id="dialogBox" width='100%'>${dialogText}</div>
             <br>
             <p><b>Style</b></p>
