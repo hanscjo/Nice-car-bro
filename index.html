@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tittel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div id="app"></div>
+    
+    <script>
+        //model
+        let eventCounter = 0;
+        let streetCounter = 0;
+        let coolness = 20;
+        let intervals = [];
+
+        let roadSrc = 'img/forest.jpeg';
+        let roadImages = ['img/forest.jpeg', 'img/bridge.jpg', 'img/castle.jpg'];
+        let dialogText = 'Du kjører i skogen...'
+        let dialogTexts = ['Du kjører i skogen...', 'Du kjører over brua!', 'Du kjører inn på Karl Johans gate'];
+
+
+        let eventImgSrc = '';
+        let currentEvent = '';
+        let eventImages = [];
+        let friendEventImages = ['img/events/king.jpg'];
+
+        let normalEvents = [{description: 'Du fant en kul pinne...', coolnessForest: 10, coolnessBridge: 0, coolnessCastle: -10, type: "normal"},
+        {description: 'Du fant en sykt kul spoiler!', coolnessForest: -30, coolnessBridge: 20, coolnessCastle: 10, type: "normal"},
+        {description: 'Du fant noen blåbær til å lakkere bilen med...', coolnessForest: 20, coolnessBridge: 10, coolnessCastle: -30, type: "normal"},
+        ];
+        let friendEvents = [
+        {description: 'Du møter en kompis...', wave: -10, peaceSign: 10, dab: -50, type: "friend"},
+        {description: 'Du møter en kompis...', wave: 10, peaceSign: 20, dab: -30, type: "friend"},
+        {description: 'Du møter en sint gammel dame!', wave: -50, peaceSign: 0, dab: 0, type: "friend"}
+        ];
+        let specialEvents = [{description: 'Kongefamilien står på slottet...', wave: 0, peaceSign: -10, dab: 50, type: "friend"}]
+        
+        //view
+        view();
+        function view() { /*HTML*/ //<-- dersom du vil få innerhtml stringen til å se ut som HTML
+            
+            let width = document.body.clientWidth;
+            document.getElementById("app").innerHTML = `
+            <h1>Velkommen!</h1>
+            <div id="roadBox">
+                <img id="roadImg" height="660px" width="100%" src=${roadSrc}>
+                <img id="eventImg" height="100px" src=${eventImgSrc}> 
+                <img id="carImg" src="img/car.png" height="100px">
+            </div>
+            <div id="dialogBox" width='100%'>${dialogText}</div>
+            <br>
+            <p><b>Style</b></p>
+            <canvas id="coolness" height="50px" width="${width}px"></canvas>
+            `;
+            let canvas = document.getElementById("coolness");
+            let context = canvas.getContext("2d");
+            let percentageWidth = width * (coolness/100);
+            //console.log(percentageWidth);
+
+            context.fillStyle = "green";
+            context.fillRect(0, 0, percentageWidth, 50);
+            
+            context.fillStyle = "red";
+            context.fillRect(percentageWidth, 0, width-percentageWidth, 50);
+        }
+
+        //controller
+        function streetChange() {
+            streetCounter++;
+            if (streetCounter == roadImages.length) {
+                streetCounter = 0;
+            }
+            roadSrc = roadImages[counter];
+            dialogText = dialogTexts[counter];
+            view();
+        }
+
+        function playerResponse(response) {
+            switch (response.innerHTML) {
+                case 'Vink!':
+                    coolness += specialEvents[0].wave;
+                    break;
+
+                case 'Peace!':
+                    coolness += specialEvents[0].peaceSign;
+                    break;
+
+                case 'Dab!':
+                    coolness += specialEvents[0].dab;
+                    break;
+            }
+            eventImgSrc = '';
+            dialogText = dialogTexts[0];
+            view();
+        }
+
+        function handleEncounter() {
+            let givenEncounter = specialEvents[0];
+            dialogText = givenEncounter.description;
+            currentEvent = givenEncounter.description;
+            if (givenEncounter.type == 'normal') {
+                dialogText += `
+                <button onclick="playerResponse(this)">Sett den på!</button>
+                <br>
+                <button onclick="playerResponse(this)">La den være...</button>`;
+            }
+            else if (givenEncounter.type == 'friend') {
+                dialogText += `<br>
+                <button onclick="playerResponse(this)">Vink!</button>
+                <br>
+                <button onclick="playerResponse(this)">Peace!</button>
+                <br>
+                <button onclick="playerResponse(this)">Dab!</button>`;
+                eventImgSrc = 'img/events/king.jpg';
+            }
+            view();
+        }
+
+        function setGivenTimeout() {
+            let givenInterval = intervals[eventCounter];
+            let intervalSum = intervals[0] + intervals[1] + intervals[2];
+            setTimeout(handleEncounter, (givenInterval/intervalSum)*10000);
+        }
+
+        function defineIntervals() {
+            let num1 = Math.floor(Math.random()*10) + 1;
+            let num2 = Math.floor(Math.random()*10) + 1;
+            let num3 = Math.floor(Math.random()*10) + 1;
+
+            return[num1, num2, num3];
+        }
+
+        function generateEncounter() {
+            let givenEncounter;
+            if (streetCounter == 2) {
+                givenEncounter = specialEvents[0];
+            }
+            else {
+                let eventIndex = Math.floor(Math.random()*(normalEvents.length+1));
+                if (eventIndex == 3) {
+                    let friendIndex = Math.floor(Math.random()*friendEvents.length);
+                    givenEncounter = friendEvents[friendIndex];
+                }
+                else {
+                    givenEncounter = normalEvents[eventIndex];
+                }
+            }
+            return givenEncounter;
+        }
+
+        setTimeout(handleEncounter, 3000);
+
+        
+
+    </script>
+</body>    
+</html>

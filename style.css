@@ -1,0 +1,34 @@
+#roadBox {
+    width: 100%;
+    height: 660px;
+}
+
+#roadImg {
+    position: fixed;
+    z-index: -1;
+}
+
+#eventImg {
+    position: fixed;
+    z-index: 1;
+    margin-top: 300px;
+    margin-left: 40%;
+}
+
+#carImg {
+    position: fixed;
+    z-index: 1;
+    margin-top: 300px;
+    margin-left: 80%;
+}
+
+#dialogBox {
+    width: 100%;
+    font-size: 32px;
+}
+
+#coolness {
+    width: 100%;
+    height: 50px;
+    border: 2px solid black;
+}
