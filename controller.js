@@ -1,11 +1,12 @@
 function streetChange() {
-    roadCounter++;
     if (roadCounter == roadImages.length) {
         roadCounter = 0;
     }
     roadSrc = roadImages[roadCounter];
     dialogText = dialogTexts[roadCounter];
-    view();
+    roadCounter++;
+    view(); 
+    //Kall denne funksjonen dersom tredje event skjer, antatt at tredje event alltid skjer etter 10 sekunder.
 }
 
 function playerResponse(response) {
