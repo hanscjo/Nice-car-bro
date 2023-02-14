@@ -45,7 +45,7 @@ function handleEncounter() {
         <button onclick="playerResponse(this)">Peace!</button>
         
         <button onclick="playerResponse(this)">Dab!</button>`;
-        eventImgSrc = 'img/events/king.jpg';
+        eventImgSrc = 'img/events/kingCat.png';
     }
     view();
 }

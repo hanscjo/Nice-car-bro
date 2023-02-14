@@ -9,6 +9,7 @@ function updateCarPositionNormal() {
 function resetCarPositionNormal() {
     carPositionLeft = 93;   
     carPositionTop = 45;
+    eventImgSrc = '';
 }
 
 function updateCarPositionCastle() {
@@ -25,8 +26,9 @@ function resetCarPositionCastle() {
     carPositionTop = 87;
     carPositionLeft = 50;
     carHeight = 100;
+    eventImgSrc = '';
 }
 
-//resetCarPositionNormal();
-//let animationForest = setInterval(updateCarPositionNormal, 36);
-let animationCastle = setInterval(updateCarPositionCastle, 50);
+resetCarPositionNormal();
+let animationForest = setInterval(updateCarPositionNormal, 36);
+//let animationCastle = setInterval(updateCarPositionCastle, 50);
