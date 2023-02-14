@@ -54,10 +54,15 @@
                 <img id="roadImg" height="660px" width="100%" src=${roadSrc}>
                 <img id="eventImg" height="100px" src=${eventImgSrc}>
 
+<<<<<<< HEAD
             ${roadCounter < 2 ? `<img id="carImg" src="img/car.png" height="100px" style="top: ${carPositionTop}%; left: ${carPositionLeft}%">` 
             : `<img id="carImg" src="img/car.png" height='${carHeight}px' style="top: ${carPositionTop}%; left: ${carPositionLeft}%">`}
 
             </div>
+=======
+            roadCounter < 2 ? html += `<img id="carImg" src="img/carImage.png" height="100px" style="top: ${carPositionTop}px; left: ${carPositionLeft}%">` 
+            : html += `<img id="carImg" src="img/car.png" height='${carHeight}px' style="top: ${carPositionTop}%; left: ${carPositionLeft}px">`;
+>>>>>>> 323f1a2e023a3fd5e092fdfc81c0f0c9571ef398
 
             <div id="dialogBox" width='100%'>${dialogText}</div>
             <br>
