@@ -27,7 +27,7 @@
         let carPositionTop = 87;
         let carHeight = 100;
 
-        let eventImgSrc = "img/events/none.png";
+        let eventImgSrc = '';
         let currentEventId;
         let normalEventImages = ['img/events/pinne.png', 'img/events/spoiler.png', 'img/events/blueberry.png'];
         let friendEventImages = ['img/events/kompis1.png', 'img/events/kompis2.png', 'img/events/gammeldame.png'];
@@ -58,7 +58,7 @@
             <h1>Velkommen!</h1>
             <div id="roadBox">
                 <img id="roadImg" height="660px" width="100%" src=${roadSrc}>
-                <img id="eventImg" src=${eventImgSrc} style="top: ${carPositionTop-2}%; left: ${carPositionLeft-3}%">
+                <img id="eventImg" src=${eventImgSrc} ${eventImgSrc == '' ? '' : `style="top: ${carPositionTop-2}%; left: ${carPositionLeft-3}%"`}>
                 <img id="carImg" src="img/carImage.png" height='${carHeight}px' style="top: ${carPositionTop}%; left: ${carPositionLeft}%">
 
             </div>
