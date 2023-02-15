@@ -9,6 +9,7 @@ function updateCarPositionNormal() {
 function resetCarPositionNormal() {
     carPositionLeft = 93;   
     carPositionTop = 45;
+    carHeight=100;
     eventImgSrc = '';
 }
 
