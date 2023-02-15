@@ -34,9 +34,11 @@
         let specialEventImages = ['img/events/kingCat.png'];
         let responseImages = ['img/responses/take.png', 'img/responses/leave.png', 'img/responses/wink.jpeg', 'img/responses/peace.png', 'img/responses/dab.png', 
                                 'img/responses/kingWink.png', 'img/responses/kingPeace.jpeg', 'img/responses/kingDab.png'];
+        let friendResponseImages = ['img/friendResponses/cringe.png', 'img/friendResponses/maaan.png','img/friendResponses/notbad.png', 'img/friendResponses/cool.png'];
+        let friendReactionSrc = '';
 
 
-        let normalEvents = [{id: 0, description: 'Du fant en kul pinne...', coolnessForest: 10, coolnessBridge: 0, coolnessCastle: -10, type: "normal"},
+        let normalEvents = [{id: 0, description: 'Du fant en kul pinne...', coolnessForest: 10, coolnessBridge: -20, coolnessCastle: -10, type: "normal"},
         {id: 1, description: 'Du fant en sykt kul spoiler!', coolnessForest: -30, coolnessBridge: 20, coolnessCastle: 10, type: "normal"},
         {id: 2, description: 'Du fant noen blåbær til å lakkere bilen med...', coolnessForest: 20, coolnessBridge: 10, coolnessCastle: -30, type: "normal"},
         ];
@@ -62,6 +64,7 @@
             </div>
 
             <div id="dialogBox" width='100%'>${dialogText}</div>
+            ${friendReactionSrc}
             <br>
             ${coolness==100 ? '<h3>Du har coolest bil</h3><br/>' : ''}
             <p><b>Style</b></p>

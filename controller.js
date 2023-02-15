@@ -52,14 +52,17 @@ function playerResponse(response) {
 
         case 'vink': //besvare kompiser, mer generell løsning
             coolness += friendEvents[currentEventId].wave;
+            friendReactionSrc = `<p><b>For en bil...</b></p><img height="100px" src=${friendResponseImages[Math.floor(coolness/33)]}>`;
             break;
 
         case 'peace':
             coolness += friendEvents[currentEventId].peaceSign;
+            friendReactionSrc = `<p><b>For en bil...</b></p><img height="100px" src=${friendResponseImages[Math.floor(coolness/33)]}>`;
             break;
 
         case 'dab':
             coolness += friendEvents[currentEventId].dab;
+            friendReactionSrc = `<p><b>For en bil...</b></p><img height="100px" src=${friendResponseImages[Math.floor(coolness/33)]}>`;
             break;
 
         case 'vinkKing': //egenhåndtering. Kan skaleres opp til flere special events ved å legge til flere cases.
@@ -98,6 +101,7 @@ function playerResponse(response) {
 
 function handleEncounter() {
     let givenEncounter = generateEncounter();
+    friendReactionSrc = '';
     if (!(roadCounter == 2 && eventCounter > 0)) { //Egenhåndtering for Karl Johan. Skal altså bare skje ett event der.
         dialogText = givenEncounter.description;
         currentEventId = givenEncounter.id;
