@@ -105,7 +105,7 @@ function handleEncounter() {
     
         if (givenEncounter.type == 'normal') {
             dialogText += `<br>
-            <button onclick="playerResponse('putOn')">Sett den på!</button>
+            <img onclick="playerResponse('putOn')">Sett den på!</button>
             <br>
             <button onclick="playerResponse('leave')">La den være...</button>`;
             eventImgSrc = normalEventImages[currentEventId];

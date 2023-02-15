@@ -32,6 +32,9 @@
         let normalEventImages = ['img/events/pinne.png', 'img/events/spoiler.png', 'img/events/blueberry.png'];
         let friendEventImages = ['img/events/kompis1.png', 'img/events/kompis2.png', 'img/events/gammeldame.png'];
         let specialEventImages = ['img/events/kingCat.png'];
+        let responseImages = ['img/responses/take.png', 'img/responses/leave.png', 'img/responses/wink.jpeg', 'img/responses/peace.png', 'img/responses/dab.png', 
+                                'img/responses/kingWink.png', 'img/responses/kingPeace.jpeg', 'img/responses/kingDab.png'];
+
 
         let normalEvents = [{id: 0, description: 'Du fant en kul pinne...', coolnessForest: 10, coolnessBridge: 0, coolnessCastle: -10, type: "normal"},
         {id: 1, description: 'Du fant en sykt kul spoiler!', coolnessForest: -30, coolnessBridge: 20, coolnessCastle: 10, type: "normal"},
@@ -60,6 +63,7 @@
 
             <div id="dialogBox" width='100%'>${dialogText}</div>
             <br>
+            ${coolness==100 ? '<h3>Du har coolest bil</h3><br/>' : ''}
             <p><b>Style</b></p>
             <canvas id="coolness" height="50px" width="${width}px"></canvas>
             `;
