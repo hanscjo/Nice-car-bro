@@ -1,3 +1,4 @@
+//Inneholder animasjoner
 function updateCarPositionNormal() {
     if (carPositionLeft < 0) {
         resetCarPositionNormal();

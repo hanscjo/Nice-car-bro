@@ -1,21 +1,21 @@
-function streetChange() {
+function streetChange() { //Blir en slags overordnet nullstillingsfunksjon
     roadCounter++;
     eventCounter = 0;
-    if (roadCounter == roadImages.length) {
+    if (roadCounter == roadImages.length) { //Dersom man bytter fra Karl Johan
         roadCounter = 0;
         intervals = defineIntervals();
         clearInterval(animation);
         resetCarPositionNormal();
         animation = setInterval(updateCarPositionNormal, 36);
-        setGivenTimeout();
+        setGivenTimeout(); //Repetisjon av main.js. Det kunne nok blitt bakt inn i en funksjon. Det er viktig med en omstilling her siden Karl Johan er spesielt definert mtp encounters
     }
-    else if (roadCounter == 2) {
+    else if (roadCounter == 2) { //Bytte til Karl Johan
         clearInterval(animation);
         resetCarPositionCastle();
         animation = setInterval(updateCarPositionCastle, 50);
-        setTimeout(handleEncounter, 5000);
+        setTimeout(handleEncounter, 5000); //Egen måte å håndtere events på
     }
-    else {
+    else { //Alle andre gater
         clearInterval(animation);
         resetCarPositionNormal();
         animation = setInterval(updateCarPositionNormal, 36);
@@ -44,13 +44,13 @@ function playerResponse(response) {
 
     switch (response) {
         case 'putOn':
-            coolness += normalEvents[currentEventId][currentRoad];
+            coolness += normalEvents[currentEventId][currentRoad]; //Coolness-verdien går opp eller ned avhengig av hvilken vei man kjører på(les: det som er trendy på den plassen)
             break;
 
         case 'leave':
             break;
 
-        case 'vink':
+        case 'vink': //besvare kompiser, mer generell løsning
             coolness += friendEvents[currentEventId].wave;
             break;
 
@@ -62,7 +62,7 @@ function playerResponse(response) {
             coolness += friendEvents[currentEventId].dab;
             break;
 
-        case 'vinkKing':
+        case 'vinkKing': //egenhåndtering. Kan skaleres opp til flere special events ved å legge til flere cases.
             coolness += specialEvents[0].wave;
             break;
 
@@ -74,20 +74,22 @@ function playerResponse(response) {
             coolness += specialEvents[0].dab;
             break;
     }
-    eventImgSrc = '';
+    coolness = Math.max(coolness, 0);
+    coolness = Math.min(coolness, 100);
+    eventImgSrc = ''; //Vi har svart på eventen, da skjuler vi bildet.
     dialogText = dialogTexts[roadCounter];
-    if (roadCounter == 2) {
+    if (roadCounter == 2) { //Egenhåndtering for Karl Johan.
         animation = setInterval(updateCarPositionCastle, 50);
         setTimeout(streetChange, 4350);
     }
     else {
-        animation = setInterval(updateCarPositionNormal, 36);   
+        animation = setInterval(updateCarPositionNormal, 36); //Fortsett å kjøre bilen   
     }
-    if (eventCounter == 3) {
+    if (eventCounter == 3) { //Vi bytter vei når det har skjedd 3 events.
         intervals = defineIntervals();
         streetChange();
     }
-    if (roadCounter != 2) {
+    if (roadCounter != 2) { //Egenhåndtering for Karl Johan. Altså vi kjører bare ett event der.
         setGivenTimeout();
     }
     
@@ -96,7 +98,7 @@ function playerResponse(response) {
 
 function handleEncounter() {
     let givenEncounter = generateEncounter();
-    if (!(roadCounter == 2 && eventCounter > 0)) {
+    if (!(roadCounter == 2 && eventCounter > 0)) { //Egenhåndtering for Karl Johan. Skal altså bare skje ett event der.
         dialogText = givenEncounter.description;
         currentEventId = givenEncounter.id;
         clearInterval(animation);
@@ -136,14 +138,14 @@ function setGivenTimeout() {
     if (roadCounter != 2) {
         let givenInterval = intervals[eventCounter];
         let intervalSum = intervals[0] + intervals[1] + intervals[2];
-        let timeout = (givenInterval/intervalSum)*10000;
+        let timeout = (givenInterval/intervalSum)*10000; //De tre eventene skjer på tilfeldige tidspunkter, men til sammen skal de alltid ta 10 sekunder med hensyn til animasjonen.
         console.log(timeout);
         setTimeout(handleEncounter, timeout);
     }
     
 }
 
-function defineIntervals() {
+function defineIntervals() { //Genererer tilfeldige timeout-faktorer som brukes i setGivenTimeout()
     let num1 = Math.floor(Math.random()*10) + 1;
     let num2 = Math.floor(Math.random()*10) + 1;
     let num3 = Math.floor(Math.random()*10) + 1;
@@ -151,18 +153,18 @@ function defineIntervals() {
     return[num1, num2, num3];
 }
 
-function generateEncounter() {
+function generateEncounter() { //Henter ut et tilfeldig event
     let givenEncounter;
-    if (roadCounter == 2) {
+    if (roadCounter == 2) { //Dersom gaten er Karl Johan
         givenEncounter = specialEvents[0];
     }
     else {
-        let eventIndex = Math.floor(Math.random()*(normalEvents.length+1));//trenges ikke +1, nå eventIndex kan bli 4 og går til else, normalEvents[4] is undefined
-        if (eventIndex == normalEvents.length) {
-            let friendIndex = Math.floor(Math.random()*friendEvents.length);//trenges -1, friendEvents[3] is undefined
+        let eventIndex = Math.floor(Math.random()*(normalEvents.length+1));
+        if (eventIndex == normalEvents.length) { //Vi roller et "friend-event"
+            let friendIndex = Math.floor(Math.random()*friendEvents.length);
             givenEncounter = friendEvents[friendIndex];
         }
-        else {
+        else { //Vi roller et "normal-event"
             givenEncounter = normalEvents[eventIndex];
         }
     }
