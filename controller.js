@@ -105,27 +105,22 @@ function handleEncounter() {
     
         if (givenEncounter.type == 'normal') {
             dialogText += `<br>
-            <img onclick="playerResponse('putOn')">Sett den på!</button>
-            <br>
-            <button onclick="playerResponse('leave')">La den være...</button>`;
+            <img class="responseImg" onclick="playerResponse('putOn')" src="img/responses/take.png">
+            <img class="responseImg" onclick="playerResponse('leave')" src="img/responses/leave.png">`;
             eventImgSrc = normalEventImages[currentEventId];
         }
         else if (givenEncounter.type == 'friend') {
             dialogText += `<br>
-            <button onclick="playerResponse('vink')">Vink!</button>
-            
-            <button onclick="playerResponse('peace')">Peace!</button>
-            
-            <button onclick="playerResponse('dab')">Dab!</button>`;
+            <img class="responseImg" onclick="playerResponse('vink')" src="img/responses/wink.jpeg">
+            <img class="responseImg" onclick="playerResponse('peace')" src="img/responses/peace.png">
+            <img class="responseImg" onclick="playerResponse('dab')" src="img/responses/dab.png">`;
             eventImgSrc = friendEventImages[currentEventId];
         }
         else if (givenEncounter.type == 'king') {
             dialogText += `<br>
-            <button onclick="playerResponse('vinkKing')">Vink!</button>
-            
-            <button onclick="playerResponse('peaceKing')">Peace!</button>
-            
-            <button onclick="playerResponse('dabKing')">Dab!</button>`;
+            <img class="responseImg" onclick="playerResponse('vinkKing')" src="img/responses/kingWink.png">
+            <img class="responseImg" onclick="playerResponse('peaceKing')" src="img/responses/kingPeace.jpeg">
+            <img class="responseImg" onclick="playerResponse('dabKing')" src="img/responses/kingDab.png">`;
             eventImgSrc = specialEventImages[currentEventId];
         }
     }

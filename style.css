@@ -22,6 +22,11 @@
     z-index: 1;
 }
 
+.responseImg {
+    height: 50px;
+    margin-right: 6px;
+}
+
 #dialogBox {
     width: 100%;
     font-size: 32px;
