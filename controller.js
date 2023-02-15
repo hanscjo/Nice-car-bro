@@ -22,6 +22,7 @@ function streetChange() { //Blir en slags overordnet nullstillingsfunksjon
     }
     roadSrc = roadImages[roadCounter];
     dialogText = dialogTexts[roadCounter];
+    eventImgSrc = 'img/events/none.png';
     view();
     //Kall denne funksjonen dersom tredje event skjer, antatt at tredje event alltid skjer etter 10 sekunder.
 }
@@ -79,7 +80,7 @@ function playerResponse(response) {
     }
     coolness = Math.max(coolness, 0);
     coolness = Math.min(coolness, 100);
-    eventImgSrc = ''; //Vi har svart på eventen, da skjuler vi bildet.
+    eventImgSrc = "img/events/none.png"; //Vi har svart på eventen, da skjuler vi bildet.
     dialogText = dialogTexts[roadCounter];
     if (roadCounter == 2) { //Egenhåndtering for Karl Johan.
         animation = setInterval(updateCarPositionCastle, 50);
