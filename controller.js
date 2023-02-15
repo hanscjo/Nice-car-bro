@@ -53,16 +53,22 @@ function playerResponse(response) {
 
         case 'vink': //besvare kompiser, mer generell løsning
             coolness += friendEvents[currentEventId].wave;
+            coolness = Math.max(coolness, 0);
+            coolness = Math.min(coolness, 100);
             friendReactionSrc = `<p><b>For en bil...</b></p><img height="100px" src=${friendResponseImages[Math.floor(coolness/33)]}>`;
             break;
 
         case 'peace':
             coolness += friendEvents[currentEventId].peaceSign;
+            coolness = Math.max(coolness, 0);
+            coolness = Math.min(coolness, 100);
             friendReactionSrc = `<p><b>For en bil...</b></p><img height="100px" src=${friendResponseImages[Math.floor(coolness/33)]}>`;
             break;
 
         case 'dab':
             coolness += friendEvents[currentEventId].dab;
+            coolness = Math.max(coolness, 0);
+            coolness = Math.min(coolness, 100);
             friendReactionSrc = `<p><b>For en bil...</b></p><img height="100px" src=${friendResponseImages[Math.floor(coolness/33)]}>`;
             break;
 
@@ -78,8 +84,7 @@ function playerResponse(response) {
             coolness += specialEvents[0].dab;
             break;
     }
-    coolness = Math.max(coolness, 0);
-    coolness = Math.min(coolness, 100);
+    
     eventImgSrc = ''; //Vi har svart på eventen, da skjuler vi bildet.
     dialogText = dialogTexts[roadCounter];
     if (roadCounter == 2) { //Egenhåndtering for Karl Johan.
