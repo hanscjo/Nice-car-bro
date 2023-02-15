@@ -56,14 +56,14 @@
             <h1>Velkommen!</h1>
             <div id="roadBox">
                 <img id="roadImg" height="660px" width="100%" src=${roadSrc}>
-                <img id="eventImg" height="100px" src=${eventImgSrc}>
+                <img id="eventImg" src=${eventImgSrc} style="top: ${carPositionTop-2}%; left: ${carPositionLeft-3}%">
                 <img id="carImg" src="img/carImage.png" height='${carHeight}px' style="top: ${carPositionTop}%; left: ${carPositionLeft}%">
 
             </div>
 
             <div id="dialogBox" width='100%'>${dialogText}</div>
             <br>
-            ${coolness==100 ? '<h3>Du har coolest bil</h3><br/>' : ''}
+            ${coolness==100 ? '<h2>Du har den kuleste bilen</h2><br/>' : ''}
             <p><b>Style</b></p>
             <canvas id="coolness" height="50px" width="${width}px"></canvas>
             `;

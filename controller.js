@@ -133,7 +133,7 @@ function setGivenTimeout() {
     if (roadCounter != 2) {
         let givenInterval = intervals[eventCounter];
         let intervalSum = intervals[0] + intervals[1] + intervals[2];
-        let timeout = (givenInterval/intervalSum)*10000; //De tre eventene skjer på tilfeldige tidspunkter, men til sammen skal de alltid ta 10 sekunder med hensyn til animasjonen.
+        let timeout = (givenInterval/intervalSum)*9500; //De tre eventene skjer på tilfeldige tidspunkter, men til sammen skal de alltid ta 10 sekunder med hensyn til animasjonen.
         console.log(timeout);
         setTimeout(handleEncounter, timeout);
     }

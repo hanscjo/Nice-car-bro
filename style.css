@@ -13,8 +13,10 @@
 #eventImg {
     position: absolute;
     z-index: 2;
-    top: 35%;
-    left: 55%;
+    height: 60px;
+    width: auto;
+    /* top: 35%;
+    left: 55%; */
 }
 
 #carImg {
