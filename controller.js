@@ -66,13 +66,13 @@ function defineIntervals() {
 
 function generateEncounter() {
     let givenEncounter;
-    if (streetCounter == 2) {
+    if (roadCounter == 2) {
         givenEncounter = specialEvents[0];
     }
     else {
-        let eventIndex = Math.floor(Math.random()*(normalEvents.length+1));
+        let eventIndex = Math.floor(Math.random()*(normalEvents.length+1));//trenges ikke +1, nå eventIndex kan bli 4 og går til else, normalEvents[4] is undefined
         if (eventIndex == 3) {
-            let friendIndex = Math.floor(Math.random()*friendEvents.length);
+            let friendIndex = Math.floor(Math.random()*friendEvents.length);//trenges -1, friendEvents[3] is undefined
             givenEncounter = friendEvents[friendIndex];
         }
         else {
