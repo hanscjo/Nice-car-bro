@@ -84,7 +84,8 @@ function playerResponse(response) {
             coolness += specialEvents[0].dab;
             break;
     }
-    
+    coolness = Math.max(coolness, 0);
+    coolness = Math.min(coolness, 100);
     eventImgSrc = ''; //Vi har svart på eventen, da skjuler vi bildet.
     dialogText = dialogTexts[roadCounter];
     if (roadCounter == 2) { //Egenhåndtering for Karl Johan.
