@@ -31,5 +31,5 @@ function resetCarPositionCastle() {
 }
 
 resetCarPositionNormal();
-let animationForest = setInterval(updateCarPositionNormal, 36);
+//let animationForest = setInterval(updateCarPositionNormal, 36);
 //let animationCastle = setInterval(updateCarPositionCastle, 50);

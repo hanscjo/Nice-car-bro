@@ -1,59 +1,146 @@
 function streetChange() {
+    roadCounter++;
+    eventCounter = 0;
     if (roadCounter == roadImages.length) {
         roadCounter = 0;
+        intervals = defineIntervals();
+        clearInterval(animation);
+        resetCarPositionNormal();
+        animation = setInterval(updateCarPositionNormal, 36);
+        setGivenTimeout();
+    }
+    else if (roadCounter == 2) {
+        clearInterval(animation);
+        resetCarPositionCastle();
+        animation = setInterval(updateCarPositionCastle, 50);
+        setTimeout(handleEncounter, 5000);
+    }
+    else {
+        clearInterval(animation);
+        resetCarPositionNormal();
+        animation = setInterval(updateCarPositionNormal, 36);
     }
     roadSrc = roadImages[roadCounter];
     dialogText = dialogTexts[roadCounter];
-    roadCounter++;
-    view(); 
+    view();
     //Kall denne funksjonen dersom tredje event skjer, antatt at tredje event alltid skjer etter 10 sekunder.
 }
 
 function playerResponse(response) {
-    switch (response.innerHTML) {
-        case 'Vink!':
+    let currentRoad;
+    switch (roadCounter) {
+        case 0:
+            currentRoad = 'coolnessForest';
+            break;
+
+        case 1:
+            currentRoad = 'coolnessBridge';
+            break;    
+        
+        case 2:
+            currentRoad = 'coolnessCastle';
+            break;
+    }
+
+    switch (response) {
+        case 'putOn':
+            coolness += normalEvents[currentEventId][currentRoad];
+            break;
+
+        case 'leave':
+            break;
+
+        case 'vink':
+            coolness += friendEvents[currentEventId].wave;
+            break;
+
+        case 'peace':
+            coolness += friendEvents[currentEventId].peaceSign;
+            break;
+
+        case 'dab':
+            coolness += friendEvents[currentEventId].dab;
+            break;
+
+        case 'vinkKing':
             coolness += specialEvents[0].wave;
             break;
 
-        case 'Peace!':
+        case 'peaceKing':
             coolness += specialEvents[0].peaceSign;
             break;
 
-        case 'Dab!':
+        case 'dabKing':
             coolness += specialEvents[0].dab;
             break;
     }
     eventImgSrc = '';
-    dialogText = dialogTexts[0];
+    dialogText = dialogTexts[roadCounter];
+    if (roadCounter == 2) {
+        animation = setInterval(updateCarPositionCastle, 50);
+        setTimeout(streetChange, 4350);
+    }
+    else {
+        animation = setInterval(updateCarPositionNormal, 36);   
+    }
+    if (eventCounter == 3) {
+        intervals = defineIntervals();
+        streetChange();
+    }
+    if (roadCounter != 2) {
+        setGivenTimeout();
+    }
+    
     view();
 }
 
 function handleEncounter() {
-    let givenEncounter = specialEvents[0];
-    dialogText = givenEncounter.description;
-    currentEvent = givenEncounter.description;
-    if (givenEncounter.type == 'normal') {
-        dialogText += `
-        <button onclick="playerResponse(this)">Sett den på!</button>
-        <br>
-        <button onclick="playerResponse(this)">La den være...</button>`;
+    let givenEncounter = generateEncounter();
+    if (!(roadCounter == 2 && eventCounter > 0)) {
+        dialogText = givenEncounter.description;
+        currentEventId = givenEncounter.id;
+        clearInterval(animation);
+    
+        if (givenEncounter.type == 'normal') {
+            dialogText += `<br>
+            <button onclick="playerResponse('putOn')">Sett den på!</button>
+            <br>
+            <button onclick="playerResponse('leave')">La den være...</button>`;
+            eventImgSrc = normalEventImages[currentEventId];
+        }
+        else if (givenEncounter.type == 'friend') {
+            dialogText += `<br>
+            <button onclick="playerResponse('vink')">Vink!</button>
+            
+            <button onclick="playerResponse('peace')">Peace!</button>
+            
+            <button onclick="playerResponse('dab')">Dab!</button>`;
+            eventImgSrc = friendEventImages[currentEventId];
+        }
+        else if (givenEncounter.type == 'king') {
+            dialogText += `<br>
+            <button onclick="playerResponse('vinkKing')">Vink!</button>
+            
+            <button onclick="playerResponse('peaceKing')">Peace!</button>
+            
+            <button onclick="playerResponse('dabKing')">Dab!</button>`;
+            eventImgSrc = specialEventImages[currentEventId];
+        }
     }
-    else if (givenEncounter.type == 'friend') {
-        dialogText += `<br>
-        <button onclick="playerResponse(this)">Vink!</button>
-        
-        <button onclick="playerResponse(this)">Peace!</button>
-        
-        <button onclick="playerResponse(this)">Dab!</button>`;
-        eventImgSrc = 'img/events/kingCat.png';
-    }
+    
+    eventCounter++;
     view();
 }
 
 function setGivenTimeout() {
-    let givenInterval = intervals[eventCounter];
-    let intervalSum = intervals[0] + intervals[1] + intervals[2];
-    setTimeout(handleEncounter, (givenInterval/intervalSum)*10000);
+    if (roadCounter != 2) {
+        let givenInterval = intervals[eventCounter];
+        let intervalSum = intervals[0] + intervals[1] + intervals[2];
+        let timeout = (givenInterval/intervalSum)*10000;
+        console.log(timeout);
+        setTimeout(handleEncounter, timeout);
+    }
+    
 }
 
 function defineIntervals() {
@@ -71,7 +158,7 @@ function generateEncounter() {
     }
     else {
         let eventIndex = Math.floor(Math.random()*(normalEvents.length+1));//trenges ikke +1, nå eventIndex kan bli 4 og går til else, normalEvents[4] is undefined
-        if (eventIndex == 3) {
+        if (eventIndex == normalEvents.length) {
             let friendIndex = Math.floor(Math.random()*friendEvents.length);//trenges -1, friendEvents[3] is undefined
             givenEncounter = friendEvents[friendIndex];
         }
@@ -82,4 +169,4 @@ function generateEncounter() {
     return givenEncounter;
 }
 
-setTimeout(handleEncounter, 3000);
+//setTimeout(handleEncounter, 3000);

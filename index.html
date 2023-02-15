@@ -14,7 +14,7 @@
     <script>
         //model
         let eventCounter = 0;
-        let roadCounter = 0;
+        let roadCounter = -1;
         let coolness = 20;
         let intervals = [];
 
@@ -28,20 +28,21 @@
         let carHeight = 100;
 
         let eventImgSrc = '';
-        let currentEvent = '';
-        let eventImages = [];
-        let friendEventImages = ['img/events/kingCat.png'];
+        let currentEventId;
+        let normalEventImages = ['img/events/pinne.png', 'img/events/spoiler.png', 'img/events/blueberry.png'];
+        let friendEventImages = ['img/events/kompis1.png', 'img/events/kompis2.png', 'img/events/gammeldame.png'];
+        let specialEventImages = ['img/events/kingCat.png'];
 
-        let normalEvents = [{description: 'Du fant en kul pinne...', coolnessForest: 10, coolnessBridge: 0, coolnessCastle: -10, type: "normal"},
-        {description: 'Du fant en sykt kul spoiler!', coolnessForest: -30, coolnessBridge: 20, coolnessCastle: 10, type: "normal"},
-        {description: 'Du fant noen blåbær til å lakkere bilen med...', coolnessForest: 20, coolnessBridge: 10, coolnessCastle: -30, type: "normal"},
+        let normalEvents = [{id: 0, description: 'Du fant en kul pinne...', coolnessForest: 10, coolnessBridge: 0, coolnessCastle: -10, type: "normal"},
+        {id: 1, description: 'Du fant en sykt kul spoiler!', coolnessForest: -30, coolnessBridge: 20, coolnessCastle: 10, type: "normal"},
+        {id: 2, description: 'Du fant noen blåbær til å lakkere bilen med...', coolnessForest: 20, coolnessBridge: 10, coolnessCastle: -30, type: "normal"},
         ];
         let friendEvents = [
-        {description: 'Du møter en kompis...', wave: -10, peaceSign: 10, dab: -50, type: "friend"},
-        {description: 'Du møter en kompis...', wave: 10, peaceSign: 20, dab: -30, type: "friend"},
-        {description: 'Du møter en sint gammel dame!', wave: -50, peaceSign: 0, dab: 0, type: "friend"}
+        {id: 0, description: 'Du møter en kompis...', wave: -10, peaceSign: 10, dab: -50, type: "friend"},
+        {id: 1, description: 'Du møter en kompis...', wave: 10, peaceSign: 20, dab: -30, type: "friend"},
+        {id: 2, description: 'Du møter en sint gammel dame!', wave: -50, peaceSign: 0, dab: 0, type: "friend"}
         ];
-        let specialEvents = [{description: 'Kongefamilien står på slottet...', wave: 0, peaceSign: -10, dab: 50, type: "friend"}]
+        let specialEvents = [{id: 0, description: 'Kongefamilien står på slottet...', wave: 0, peaceSign: -10, dab: 50, type: "king"}]
         
         //view
         view();
@@ -83,6 +84,6 @@
     </script>
     <script src="controller.js"></script>
     <script src="car.js"></script>
-    <!--<script src="main.js" defer></script>-->
+    <script src="main.js" defer></script>
 </body>    
 </html>
